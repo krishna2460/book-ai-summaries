@@ -55,6 +55,7 @@ class Settings(BaseSettings):
     # ── App ───────────────────────────────────────────────
     upload_dir: str = "./uploads"
     log_level: str = "INFO"
+    cors_origins: str = "http://localhost:3000,http://127.0.0.1:3000"
 
 
 @lru_cache

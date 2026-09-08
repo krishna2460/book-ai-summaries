@@ -62,10 +62,7 @@ app = FastAPI(
 # 1. CORS — allow the Next.js frontend (and any dev tools)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",      # Next.js dev server
-        "http://127.0.0.1:3000",
-    ],
+    allow_origins=[origin.strip() for origin in settings.cors_origins.split(",") if origin.strip()],
     allow_origin_regex=r"https?://(?:localhost|127\.0\.0\.1|192\.168\.\d+\.\d+|10\.\d+\.\d+\.\d+|172\.(?:1[6-9]|2\d|3[01])\.\d+\.\d+):\d+",
     allow_credentials=True,           # needed for session cookies
     allow_methods=["*"],
