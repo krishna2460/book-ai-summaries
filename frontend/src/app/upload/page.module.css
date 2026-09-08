@@ -1,0 +1,189 @@
+.wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.header {
+  margin-bottom: var(--space-2xl);
+  animation: fade-in 0.5s ease-out;
+}
+
+.header h1 {
+  margin-bottom: var(--space-sm);
+}
+
+
+/* ── Dropzone ───────────────────────────────────────────────── */
+.dropzone {
+  padding: var(--space-3xl) var(--space-xl);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  border-style: dashed;
+  border-width: 2px;
+  animation: scale-in 0.4s ease-out;
+}
+
+.dropzone:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 212, 255, 0.3);
+  background: var(--bg-glass-hover);
+}
+
+.dropzoneActive {
+  border-color: var(--accent-cyan) !important;
+  background: rgba(0, 212, 255, 0.06) !important;
+  box-shadow: var(--shadow-glow-cyan) !important;
+}
+
+.dropzoneHasFile {
+  border-style: solid;
+  padding: var(--space-lg) var(--space-xl);
+  cursor: default;
+}
+
+.fileInput {
+  display: none;
+}
+
+.dropContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.dropIcon {
+  color: var(--text-muted);
+  opacity: 0.6;
+  transition: all var(--transition-base);
+}
+
+.dropzone:hover .dropIcon {
+  color: var(--accent-cyan);
+  opacity: 1;
+  transform: translateY(-4px);
+}
+
+.dropText {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.dropText strong {
+  color: var(--accent-cyan);
+}
+
+.dropHint {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+
+/* ── File Preview ───────────────────────────────────────────── */
+.filePreview {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  text-align: left;
+  width: 100%;
+}
+
+.fileIcon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.fileInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.fileName {
+  font-weight: 600;
+  font-size: 0.9375rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fileSize {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.removeBtn {
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+
+
+/* ── Error ──────────────────────────────────────────────────── */
+.errorBox {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: rgba(244, 63, 94, 0.08);
+  border: 1px solid rgba(244, 63, 94, 0.2);
+  border-radius: var(--radius-md);
+  color: var(--accent-rose);
+  font-size: 0.875rem;
+  margin-top: var(--space-md);
+  text-align: left;
+  animation: fade-in 0.3s ease-out;
+}
+
+.errorIcon {
+  flex-shrink: 0;
+}
+
+
+/* ── Progress ───────────────────────────────────────────────── */
+.progressContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+  animation: fade-in 0.3s ease-out;
+}
+
+.progressBar {
+  flex: 1;
+  height: 6px;
+  background: var(--bg-tertiary);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--gradient-primary);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+.progressFill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.progressText {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  min-width: 40px;
+  text-align: right;
+}
+
+
+/* ── Upload Button ──────────────────────────────────────────── */
+.uploadBtn {
+  width: 100%;
+  margin-top: var(--space-lg);
+}

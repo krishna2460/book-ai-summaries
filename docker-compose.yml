@@ -1,0 +1,60 @@
+version: "3.9"
+
+services:
+  # ── PostgreSQL with pgvector ──────────────────────────────────────────
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: booksumm-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: booksumm
+      POSTGRES_PASSWORD: booksumm_secret
+      POSTGRES_DB: booksumm
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U booksumm"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # ── FastAPI backend ───────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: booksumm-backend
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://booksumm:booksumm_secret@db:5432/booksumm
+      DATABASE_URL_SYNC: postgresql+psycopg2://booksumm:booksumm_secret@db:5432/booksumm
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+      - upload_data:/app/uploads
+
+  # ── Next.js frontend ─────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: booksumm-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8000
+
+volumes:
+  pgdata:
+  upload_data:

@@ -1,0 +1,141 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-2xl);
+  animation: fade-in 0.4s ease-out;
+}
+
+.header h1 {
+  margin-bottom: 4px;
+}
+
+
+/* ── Grid ───────────────────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-lg);
+}
+
+
+/* ── Card ───────────────────────────────────────────────────── */
+.card {
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.card:hover {
+  color: inherit;
+}
+
+.cardIcon {
+  font-size: 1.75rem;
+  margin-bottom: var(--space-xs);
+}
+
+.cardBody {
+  flex: 1;
+}
+
+.cardTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.cardSummary {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-top: var(--space-sm);
+}
+
+
+/* ── Skeleton ───────────────────────────────────────────────── */
+.skeletonIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+}
+
+.skeletonTitle {
+  width: 70%;
+  height: 18px;
+  margin-top: var(--space-sm);
+}
+
+.skeletonMeta {
+  width: 50%;
+  height: 14px;
+  margin-top: var(--space-sm);
+}
+
+.skeletonBadge {
+  width: 80px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  margin-top: var(--space-sm);
+}
+
+
+/* ── Empty State ────────────────────────────────────────────── */
+.empty {
+  text-align: center;
+  padding: var(--space-4xl) 0;
+  animation: fade-in 0.5s ease-out;
+}
+
+.emptyIcon {
+  font-size: 4rem;
+  margin-bottom: var(--space-lg);
+  opacity: 0.5;
+}
+
+.empty h3 {
+  margin-bottom: var(--space-sm);
+}
+
+.empty p {
+  margin-bottom: var(--space-xl);
+}
+
+
+/* ── Error ──────────────────────────────────────────────────── */
+.errorBox {
+  text-align: center;
+  padding: var(--space-2xl);
+  background: rgba(244, 63, 94, 0.06);
+  border: 1px solid rgba(244, 63, 94, 0.15);
+  border-radius: var(--radius-lg);
+  animation: fade-in 0.3s ease-out;
+}
+
+.errorBox p {
+  margin-bottom: var(--space-md);
+  color: var(--accent-rose);
+}
+
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
