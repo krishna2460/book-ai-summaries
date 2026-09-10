@@ -22,7 +22,7 @@ class Settings(BaseSettings):
 
     # ── Database ──────────────────────────────────────────
     database_url: str = "postgresql+asyncpg://booksumm:booksumm_secret@localhost:5432/booksumm"
-    database_url_sync: str = "postgresql+psycopg2://booksumm:booksumm_secret@localhost:5432/booksumm"
+    database_url_sync: str = ""  # Will be derived from database_url if not set
 
     # ── AIMLAPI (OpenAI-compatible) ──────────────────────
     aiml_api_key: str = ""
@@ -57,11 +57,16 @@ class Settings(BaseSettings):
     log_level: str = "INFO"
     cors_origins: str = "http://localhost:3000,http://127.0.0.1:3000"
 
+    def __init__(self, **data):
+        super().__init__(**data)
+        # If database_url_sync is not explicitly set, derive it from database_url
+        if not self.database_url_sync:
+            self.database_url_sync = self.database_url.replace("+asyncpg", "+psycopg2")
+
 
 @lru_cache
 def get_settings() -> Settings:
-    """Return a cached singleton so env is read only once."""
     return Settings()
 
-
 settings = get_settings()
+
